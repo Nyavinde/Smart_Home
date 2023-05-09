@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    
+    <title>Home_Page</title>
+    <style>
+    button{
+      transition: 0.5s;
+    }
+    button:hover{
+      background-color: brown;
+      color: beige;
+
+    }
+
+
+    </style>
+  </head>
+  
+  <body bgcolor="white">
+
+    
+    <div class="container" align="center" "col-md-4 col-lg-offset-4">
+       
+      
+      <br>
+      <h1>Welcome,You may control appliances below:</h1>
+      
+      <h1> Time is <span id="time"> </span></h1>
+      <br>
+      <br>
+
+      <div class="container">
+        
+      </div>
+      
+      <div class="kitswitch">
+
+          <img id="bulb1" src="https://jooinn.com/images/isolated-light-bulb-1.jpg" width="100px" height="100px" alt="">
+          
+          
+          <p><button onclick="light('on', 'bulb1')" >  KITCHEN_ON  </button></p>
+          <p><button onclick="light('off', 'bulb1')">  KITCHEN_OFF  </button></p>
+          
+  
+      </div>
+        <br>
+        <br>
+      
+        <div class="bedswitch">
+          <img id="bulb2" src="https://jooinn.com/images/isolated-light-bulb-1.jpg" width="100px" height="100px" alt="">
+          
+          <br>
+          <p><button onclick="light('on','bulb2')"> BEDROOM_ON  </button></p>
+          
+          <p><button onclick="light('off','bulb2')"> BEDROOM_OFF  </button></p>
+    
+          
+      
+        </div>
+       
+              <br>
+             
+
+              
+              <div class="plug1">
+                <img id="plug1" src="https://www.iconexperience.com/_img/v_collection_png/512x512/shadow/switch_off.png" width="80px" height="80px" alt="">
+                <br>
+                <p><button onclick="switch_btn('on', 'plug1')">  PLUG1_ON  </button></p>
+                <p><button onclick="switch_btn('off', 'plug1')">  PLUG1_OFF  </button></p>
+    
+                
+              
+              
+              </div>
+
+              <br>
+              <div class="plug2">
+                <img id="plug2" src="https://www.iconexperience.com/_img/v_collection_png/512x512/shadow/switch_off.png" width="80px" height="80px" alt="">
+                <br>
+                <p><button onclick="switch_btn('on', 'plug2')">  PLUG1_ON  </button></p>
+                <p><button onclick="switch_btn('off', 'plug2')">  PLUG1_OFF  </button></p>
+                
+    
+                
+              </div>
+              
+              <div class="fan1">
+                  <img id="fan1" src="https://i5.walmartimages.com/asr/99b13d75-615e-4f58-af30-f54ff1455f4b_1.1441e19dff9e987d5d9b41a2c99d8edb.png" width="150px" height="150px" alt="">
+                <br>
+                
+                <p><button onclick="fan_btn('on','fan1')">  FAN_ON  </button></p>
+                <p><button onclick="fan_btn('off','fan1')">  FAN_OFF  </button></p>
+    
+                
+              </div>
+              <br>
+              <p>
+               <a href="http://0.0.0.0:800/"><button class="btn btn primary btn-lg">Logout</button>
+           </p>
+      </div>
+          
+      </div>
+     
+    <script type="text/javascript">
+    
+      const send_server = async (url) => { return await fetch(url, { method: 'GET' }) }
+    
+      const imgs = {
+          bulb: {
+              'on': "https://cdn.christmaslightsetc.com/images/ProductCloseup/25048/A19-E26-socket-Transparent-Incandescent-yellow-party-sign-lamp-light-bulb-IMG_1480.jpg",
+              'off': "https://jooinn.com/images/isolated-light-bulb-1.jpg"
+          },
+          switch: {
+            'on': "https://www.iconexperience.com/_img/v_collection_png/512x512/shadow/switch_on.png",
+            'off': "https://www.iconexperience.com/_img/v_collection_png/512x512/shadow/switch_off.png"
+          },
+         myfan: {
+             'on':"https://fanimation.com/wp-content/uploads/2017/03/slinger_bl_spin.gif",
+              'off':"https://i5.walmartimages.com/asr/99b13d75-615e-4f58-af30-f54ff1455f4b_1.1441e19dff9e987d5d9b41a2c99d8edb.png"
+              }
+
+      }
+     
+      async function light (show, id) {
+          document.getElementById(id).src =imgs.bulb[show];
+          
+          
+          await send_server(`/${id == 'bulb1' ? 'bedroom' : 'kitchen'}_${show}`)
+          
+          // let o = `/${id == 'bulb1' ? 'bedroom' : 'kitchen'}_${show}`
+          // console.log(o);
+      }
+
+      async function switch_btn (show, id) {
+          document.getElementById(id).src =imgs.switch[show];
+          
+          await send_server(`/coupler${id == 'plug1' ?   '1' : '2'}_${show}`)
+        }
+
+        async function fan_btn(show, id) {
+            document.getElementById(id).src = imgs.myfan[show];
+
+            await send_server(`/fan_${show}`)
+        }
+
+       
+        function refreshTime(){
+        var datetime = new Date().toLocaleTimeString();
+        console.log(datetime); 
+        document.getElementById("time").textContent = datetime;
+        }
+        setInterval(refreshTime, 1000);
+         
+       
+    </script>
+  </body>
+</html>

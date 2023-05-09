@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+
+
+
+
+  </head>
+  <body text="black" bgcolor="grey" "col-md-4">
+
+    <header class="header" align="center" "col-md-2 bottom">
+      <br>
+      <br>
+      <br>
+      <br>
+      <h2>Enter your details below to login:</h2>
+
+      <div class="login" >
+
+        <form action="/form_login" method="post">
+
+          <label for="Username: ">Username:</label>
+          <input type="text" placeholder="Username " name ="username" value="{{
+            request.form.username }}">
+          <br>
+          <br>
+          <label for="Password: ">Password:</label>
+          <input type="Password" placeholder="Password" name="password" value="{{request.form.password}}" >
+            <div style = "position:relative;left:100px;"
+            <br>
+           <input type="Submit" value="Login">
+          </div>
+      </form>
+      <h1>{{info}}</h1>
+
+
+      </div>
+    </header>
+
+
+
+  </body >
+</html>

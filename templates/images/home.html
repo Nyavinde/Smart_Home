@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    
+    <title>Home_Page</title>
+    
+  </head>
+  
+  <body button="black" bgcolor="white">
+    <div class="container" align="center" "col-md-4 col-lg-offset-4">
+       
+      
+      <br>
+      <h2>Welcome,You may control appliances below:</h2>
+      <br>
+      <br>
+      <div class="btn">
+
+        <center>
+          
+          
+          <img id="bulb1" src="https://jooinn.com/images/isolated-light-bulb-1.jpg" width="100px" height="100px" alt="">
+          
+          <br>
+          <p><button onclick="light('on', 'bulb1')">  KITCHEN_ON  </button></p>
+          
+          <p><button onclick="light('off', 'bulb1')">  KITCHEN_OFF  </button></p>
+          
+        
+        </center>
+          
+
+        <br>
+        <br>
+      
+        <div class="bedroom""col-md-4 col-lg-offset-4">
+          <img id="bulb2" src="https://jooinn.com/images/isolated-light-bulb-1.jpg" width="100px" height="100px" alt="">
+          
+          <br>
+          <p><button onclick="light('on','bulb2')"> BEDROOM_ON  </button></p>
+          
+          <p><button onclick="light('off','bulb2')"> BEDROOM_OFF  </button></p>
+    
+          
+      
+        </div>
+       
+              <br>
+             
+
+              
+              <div class="plug1">
+                <img src="https://www.iconexperience.com/_img/v_collection_png/512x512/shadow/switch_on.png" width="80px" height="80px" alt="">
+                <br>
+                <a href=\coupler1_on><button>  PLUG1_ON  </button></a>
+                <a href=\coupler1_off><button>  PLUG1_OFF  </button></a>
+    
+                
+              
+              
+              </div>
+
+              <br>
+              <div class="plug2">
+                <img src="https://www.iconexperience.com/_img/v_collection_png/512x512/shadow/switch_off.png" width="80px" height="80px" alt="">
+                <br>
+                <a href=\coupler2_on><button>  PLUG2_ON  </button></a>
+                <a href=\coupler2_off><button>  PLUG2_OFF  </button></a>
+    
+                
+              </div>
+              
+              <div class="fan">
+              
+                <br>
+                <a href=\fan_on><button>  FAN_ON  </button></a>
+                <a href=\fan_off><button>  FAN_OFF  </button></a>
+    
+                
+              </div>
+
+      </div>
+          <br>
+          <p>
+           <a href="http://192.168.43.171/"><button class="btn btn primary btn-lg">Logout</button>
+       </p>
+      </div>
+     
+    <script type="text/javascript">
+    
+      const send_server = async (url) => { return await fetch(url, { method: 'GET' }) }
+    
+      const imgs = {
+          bulb: {
+              'on': "https://cdn.christmaslightsetc.com/images/ProductCloseup/25048/A19-E26-socket-Transparent-Incandescent-yellow-party-sign-lamp-light-bulb-IMG_1480.jpg",
+              'off': "https://jooinn.com/images/isolated-light-bulb-1.jpg"
+          }
+      }
+     
+          async function light(show, id) {
+          document.getElementById(id).src =imgs.bulb[show];
+          
+          await send_server(`/${id == 'bulb1' ? 'kitchen' : 'bedroom'}_${show}`)
+          
+          
+      }
+        
+    </script>
+  </body>
+</html>
